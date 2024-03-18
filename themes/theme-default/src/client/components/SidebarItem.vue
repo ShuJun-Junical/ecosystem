@@ -24,13 +24,25 @@ const { item, depth } = toRefs(props)
 const route = useRoute()
 const router = useRouter()
 
-const isActive = computed(() => isActiveSidebarItem(item.value, route))
-const itemClass = computed(() => ({
-  'sidebar-item': true,
-  'sidebar-heading': depth.value === 0,
-  'active': isActive.value,
-  'collapsible': item.value.collapsible,
-}))
+const isActive = computed(() => {
+  const a = isActiveSidebarItem(item.value, route)
+
+  if (a) console.log('isActive', item.value.link, route.hash)
+
+  return a
+})
+const itemClass = computed(() => {
+  const a = {
+    'sidebar-item': true,
+    'sidebar-heading': depth.value === 0,
+    'active': isActive.value,
+    'collapsible': item.value.collapsible,
+  }
+
+  if (isActive.value) console.warn(a)
+
+  return a
+})
 
 const isOpenDefault = computed(() =>
   item.value.collapsible ? isActive.value : true,

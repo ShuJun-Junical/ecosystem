@@ -23,6 +23,7 @@ export const isActiveSidebarItem = (
   route: RouteLocationNormalizedLoaded,
 ): boolean => {
   if (item.link && isActiveLink(item.link, route)) {
+    console.log(true, item.link)
     return true
   }
 
